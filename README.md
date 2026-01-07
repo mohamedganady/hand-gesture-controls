@@ -1,74 +1,154 @@
-<!-- =========================
-     Hand Gesture Controls README
-     Interactive + All-in-one
-========================= -->
+# 🖐 Hand Gesture Controls (Mouse & Volume)
 
-# 🖐 Hand Gesture Controls (Mouse & Volume)  
-Control your **mouse cursor, clicks, and system volume** using **hand gestures** from your webcam.  
-Built with **Python + OpenCV + MediaPipe Tasks** and optimized for **macOS**.
-
-> ✅ Touchless HCI (Human–Computer Interaction) demo: gestures → real mouse + volume actions.
+Control your **mouse cursor, clicks, and system volume** using **hand gestures** captured from your webcam.  
+Built with **Python, OpenCV, and MediaPipe Tasks**. Optimized for **macOS**.
 
 ---
 
-## 🔗 Quick Navigation (Interactive)
-- [✨ Demo & Features](#-demo--features)
-- [🧩 Requirements](#-requirements)
-- [⚡ Installation](#-installation)
-- [▶️ Run](#️-run)
-- [🖐 Gesture Guide](#-gesture-guide)
-- [📁 Project Files](#-project-files)
-- [🛠 Troubleshooting](#-troubleshooting)
-- [🧠 How It Works](#-how-it-works)
-- [🗺 Roadmap](#-roadmap)
-- [👨‍💻 Author](#-author)
-- [📝 License](#-license)
-
----
-
-## ✨ Demo & Features
-✅ What you can do:
-- 🖱 **Move mouse** with your **index finger**
-- 👆 **Click** using a **pinch** gesture
-- 🔊 **Adjust volume** using **thumb ↔ index distance**
-- 📊 Show **volume bar** on screen
-- ✋ **Open hand** → enable volume control
-- ✊ **Closed hand** → disable volume control
-- 🧭 **Smooth cursor movement** for stability
-
-<details>
-<summary><b>💡 Tip: Best environment for accuracy (click to expand)</b></summary>
-
-- Use good lighting
-- Keep hand inside the camera frame
-- Avoid very fast movements at the start
-- Use a plain background if possible
-</details>
+## 📖 Project Description
+This project enables touchless control of your **mouse (cursor movement and clicks)** and **system volume** using real-time **hand gestures**.  
+It leverages computer vision to detect hand landmarks and translate them into actual operating system actions.
 
 ---
 
 ## 🧩 Requirements
-- Python **3.10+** (recommended: **3.11**)
-- Webcam (built-in or external)
-- macOS recommended (volume control uses AppleScript)
+- **Python 3.10+** (recommended: **3.11**)  
+- **Webcam** (built-in or external)  
+- **macOS recommended** (volume control via AppleScript)  
+- **Git**
 
 ---
 
-## ⚡ Installation
-
-### 1) Clone the repository
+## 🔽 Clone
 ```bash
 git clone https://github.com/mohamedganady/hand-gesture-controls.git
 cd hand-gesture-controls
+```
 
-### 2) Create & activate a virtual environment
+---
+
+## 🧪 Create & Activate Virtual Environment
+
+**macOS / Linux**
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
+**Windows (PowerShell)**
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-###  3) Install dependencies
+---
+
+## 📦 Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
+---
 
-### ▶️ Run
+## ▶️ Run
+```bash
 python main.py
+```
+- Press **ESC** to exit.  
+- On the first run, the MediaPipe hand model will be downloaded automatically if it is not already present.
+
+---
+
+## 🖐 Gesture Guide
+| Gesture | Action |
+|--------|--------|
+| Move index finger | Move mouse cursor |
+| Pinch (index + middle) | Click |
+| Open hand ✋ | Enable volume control |
+| Closed hand ✊ | Disable volume control |
+| Thumb ↔ Index distance | Increase / Decrease volume |
+
+---
+
+## 📁 Project Structure
+```
+hand-gesture-controls/
+├─ main.py               # Full system: mouse + click + volume + on-screen UI
+├─ mouse_cursor.py      # Cursor movement logic
+├─ clickUsingPinch.py   # Pinch-click gesture testing
+├─ count.py             # Finger counting experiments
+├─ test.py              # MediaPipe / environment checks
+├─ requirements.txt     # Project dependencies
+└─ README.md            # Documentation
+```
+
+---
+
+## 🧠 How It Works
+1) **Capture** video frames using OpenCV  
+2) **Detect** hand landmarks using MediaPipe Tasks  
+3) **Map** landmarks to:
+   - Cursor position (index fingertip)
+   - Click action (pinch gesture)
+   - Volume level (thumb–index distance)  
+4) **Smooth and apply** actions while rendering a live UI overlay
+
+---
+
+## 🛠 Troubleshooting
+
+**Camera not working / black screen**
+- Close other apps using the camera (Zoom, Teams, browsers)
+- Try another camera index in code:
+```python
+cap = cv2.VideoCapture(1)
+```
+- Restart the terminal
+
+**Volume does not change on macOS**
+```bash
+osascript -e 'set volume output volume 50'
+```
+If this does not change the volume, check macOS automation permissions.
+
+**Cursor is shaking or too sensitive**
+- Increase smoothing values in `main.py`
+- Improve lighting conditions
+- Keep your hand centered and steady
+
+---
+
+## 🧪 Use-Cases
+- Touchless control for presentations  
+- Accessibility tools  
+- HCI / Computer Vision demonstrations  
+- Robotics & AI education  
+- Smart workspaces  
+
+---
+
+## 🗺 Roadmap
+- Windows support using `pycaw`  
+- Left / Right click gestures  
+- Calibration & sensitivity UI  
+- Multi-hand support  
+- Custom gesture mapping  
+
+---
+
+## 🙏 Acknowledgements
+- Google **MediaPipe**  
+- **OpenCV** community  
+- Python open-source ecosystem  
+
+---
+
+## 👨‍💻 Author
+**Mohamed Ganady**  
+Robotics & AI Instructor | Embedded Systems Developer  
+GitHub: https://github.com/mohamedganady  
+
+---
+
+## 📝 License
+MIT License — free to use and modify with attribution.
