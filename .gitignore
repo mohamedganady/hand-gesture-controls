@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Media / large files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+
+# MediaPipe model (download on run)
+hand_landmarker.task
+
